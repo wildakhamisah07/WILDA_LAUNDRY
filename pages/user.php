@@ -6,7 +6,7 @@
 // require_once 'config/koneksi.php';
 
 $query = mysqli_query($config, "SELECT l.name as level_name, u.* FROM users u
-LEFT JOIN levels l ON l.id = u.level_id ORDER BY u.id DESC");+
+LEFT JOIN levels l ON l.id = u.level_id ORDER BY u.id DESC");
 $users = mysqli_fetch_all($query, mode: MYSQLI_ASSOC);
 
 // disini parameter delete
