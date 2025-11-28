@@ -8,9 +8,6 @@ $rowServices  = mysqli_fetch_all($queryServices, MYSQLI_ASSOC);
 $queryCustomers   = mysqli_query($config, "SELECT * FROM customers");
 $rowCustomers  = mysqli_fetch_all($queryCustomers, MYSQLI_ASSOC);
 
-$querytax   = mysqli_query($config, "SELECT * FROM taxs WHERE is_active = 1 ORDER BY id  DESC LIMIT 1");
-$rowtax = mysqli_fetch_assoc($querytax);
-
 // query product 
 
 // $queryProducts    = mysqli_query($config, "SELECT s.name, p.* FROM products p LEFT JOIN categories c ON c.id = p.category_id");
@@ -26,15 +23,15 @@ if (isset($_GET['payment'])) {
   $tax            = $data['tax'];
   $orderAmounth   = $data['grandTotal'];
   $orderCode      = $data['order_code'];
-  $end_date       = $data["end_date"];
-  $customer_id    = $data["customer_id"];
-  $orderChange    = $data["change"];
-  $orderPay       = $data["pay"];
+  $end_date      = $data["end_date"];
+  $customer_id      = $data["customer_id"];
+  $orderChange    = 0;
+  $orderPay    = 0;
   $orderStatus    = 1;
   $subtotal       = $data['subtotal'];
 
   try {
-    $insertOrder    = mysqli_query($config, "INSERT INTO trans_orders (order_code, order_end_date, order_total, order_pay, order_change, order_tax, order_status, customer_id) VALUES ('$orderCode','$end_date', '$orderAmounth', '$orderPay', '$orderChange', '$tax', '$orderStatus', '$customer_id')");
+    $insertOrder    = mysqli_query($config, "INSERT INTO trans_orders (order_code, order_end_date, order_total, order_pay, order_change, order_tax, order_status) VALUES ('$orderCode','$end_date', '$orderAmounth', '$orderPay', '$orderChange', '$tax', '$orderStatus')");
 
     if (!$insertOrder) {
       throw new Exception("Insert failed to table orders", mysqli_error($config));
@@ -107,7 +104,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
       <div class="col-md-7 product-section">
         <div class="card shadow-sm mb-3" style="border-radius: 12px;">
           <div class="card-header text-center">
-            <b>Customer</b>
+            Customer
           </div>
           <div class="card-body">
             <div class="row g-3">
@@ -116,7 +113,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                   Customer Name
                 </label>
                 <select name="customer_id" id="customer_id" 
-                class="form-control" onchange="selectCustomers()" style="border-radius: 12px; background-color: #e3f2fd;">
+                class="form-control" onchange="selectCustomers()" style="border-radius: 12px;">
                   <option value="">Select One</option>
                   <?php foreach($rowCustomers as $customer): ?>
                   <option data-phone="<?php echo $customer['phone'] ?>" 
@@ -130,14 +127,14 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                 <label for="" class="form-label" >
                   Phone Number
                 </label>
-                <input type="text" class="form-control" style="border-radius: 12px; background-color: #e3f2fd;"
+                <input type="text" class="form-control" style="border-radius: 12px;"
                   placeholder="Phone Number" id="phone" readonly>
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label" style="border-radius: 12px;">
                   End Date
                 </label>
-                <input type="date" name="end_date" id="end_date" style="border-radius: 12px; background-color: #e3f2fd;"
+                <input type="date" name="end_date" id="end_date" style="border-radius: 12px;"
                   class="form-control">
               </div>
             </div>
@@ -145,7 +142,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
         </div>
         <div class="card shadow-sm mb-3" style="border-radius: 12px;">
           <div class="card-header text-center">
-            <b>Laundry Service</b>
+            Laundry Service
           </div>
           <div class="card-body">
             <div class="row g-3">
@@ -191,8 +188,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                 <div class="mb-3">
                   <label for="" class="form-label">Weight / Qty</label>
                   <input type="number" id="modal_qty"
-                  class="form-control" placeholder="Weight / Qty" 
-                  step="0.1" min="0"> 
+                  class="form-control" placeholder="Weight / Qty">
                 </div>
 
               </div>
@@ -227,24 +223,14 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
               <input type="hidden" id="subtotal_value">
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <span>Pajak (<?php echo $rowtax['percent'] ?>%) :</span>
+              <span>Pajak (10%)</span>
               <span id="tax">Rp. 0.0</span>
               <input type="hidden" id="tax_value">
-              <input type="hidden" id="tax_id" value="<?php echo $rowtax['percent'] ?>"> <!-- MARK -->
-
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <span>Total :</span>
+              <span>Total</span>
               <span id="total">Rp. 0.0</span>
               <input type="hidden" id="total_value">
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-              <span>Pay :</span>
-              <input type="number" id="pay" class="form-control w-50" placeholder="Enter the amount" oninput="calculateChange()" style="background-color: #BBDEFB;">
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-              <span>Change :</span>
-              <input type="number" id="change" class="form-control w-50" style="background-color: #BBDEFB;" readonly >
             </div>
           </div>
           <div class="row g-2">
@@ -268,6 +254,10 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 
+
+  <script>
+
+  </script>
 
   <script src="../assets/js/aldo.js"></script>
 

@@ -8,15 +8,12 @@ $rowServices  = mysqli_fetch_all($queryServices, MYSQLI_ASSOC);
 $queryCustomers   = mysqli_query($config, "SELECT * FROM customers");
 $rowCustomers  = mysqli_fetch_all($queryCustomers, MYSQLI_ASSOC);
 
-$querytax   = mysqli_query($config, "SELECT * FROM taxs WHERE is_active = 1 ORDER BY id  DESC LIMIT 1");
-$rowtax = mysqli_fetch_assoc($querytax);
-
 // query product 
 
 // $queryProducts    = mysqli_query($config, "SELECT s.name, p.* FROM products p LEFT JOIN categories c ON c.id = p.category_id");
 // $fetchProducts    = mysqli_fetch_all($queryProducts, MYSQLI_ASSOC);
 
-if (isset($_GET['payment'])) {
+if (isset($_GET['tax'])) {
 
   // transaction
   mysqli_begin_transaction($config);
@@ -26,15 +23,16 @@ if (isset($_GET['payment'])) {
   $tax            = $data['tax'];
   $orderAmounth   = $data['grandTotal'];
   $orderCode      = $data['order_code'];
-  $end_date       = $data["end_date"];
-  $customer_id    = $data["customer_id"];
-  $orderChange    = $data["change"];
-  $orderPay       = $data["pay"];
+  $end_date       = $data['end_date'];
+  $customer_id    = $data['customer_id'];
+  $orderChange    = 0;
+  $orderPay       = 0;
   $orderStatus    = 1;
   $subtotal       = $data['subtotal'];
 
   try {
-    $insertOrder    = mysqli_query($config, "INSERT INTO trans_orders (order_code, order_end_date, order_total, order_pay, order_change, order_tax, order_status, customer_id) VALUES ('$orderCode','$end_date', '$orderAmounth', '$orderPay', '$orderChange', '$tax', '$orderStatus', '$customer_id')");
+    $insertOrder    = mysqli_query($config, "INSERT INTO trans_orders (order_code, order_end_date, order_total, order_pay, order_change, order_tax, order_status) 
+    VALUES ('$orderCode','$end_date', '$orderAmounth', '$orderPay', '$orderChange', '$tax', '$orderStatus')");
 
     if (!$insertOrder) {
       throw new Exception("Insert failed to table orders", mysqli_error($config));
@@ -45,9 +43,10 @@ if (isset($_GET['payment'])) {
       $service_id   = $v['id'];
       $qty          = $v['qty'];
       $order_price  = $v['price'];
-      $subtotal     = $qty * $order_price;
+      $subtotal     = $qty * $price;
 
-      $insertOrderDetails = mysqli_query($config, "INSERT INTO trans_order_details (order_id, service_id, qty, price, subtotal) VALUES ('$idOrder','$service_id', '$qty', '$order_price', '$subtotal')");
+      $insertOrderDetails = mysqli_query($config, "INSERT INTO trans_order_details (order_id, service_id, qty, price, subtotal) 
+      VALUES ('$idOrder', '$service_id', '$qty', '$order_price', '$subtotal')");
       if (!$insertOrderDetails) {
         throw new Exception("Insert failed to table order details", mysqli_error($config));
       }
@@ -107,7 +106,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
       <div class="col-md-7 product-section">
         <div class="card shadow-sm mb-3" style="border-radius: 12px;">
           <div class="card-header text-center">
-            <b>Customer</b>
+            <b>Customer</b> 
           </div>
           <div class="card-body">
             <div class="row g-3">
@@ -137,7 +136,7 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                 <label for="" class="form-label" style="border-radius: 12px;">
                   End Date
                 </label>
-                <input type="date" name="end_date" id="end_date" style="border-radius: 12px; background-color: #e3f2fd;"
+                <input type="date" name="end_date" id="end_date" style="border-radius: 12px; background-color: #e3f2fd;" 
                   class="form-control">
               </div>
             </div>
@@ -152,10 +151,10 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
               <?php foreach($rowServices as $service) : ?>
               <div class="col-md-4 mb-3">
                 <div class="card service-card" style="border-radius: 12px; padding: 10px;" 
-                onclick="openModal(<?php echo htmlspecialchars(json_encode($service)) ?>)">
+                onclick='openModal(<?php echo htmlspecialchars(json_encode($service)) ?>)'>
 
                   <h6><?php echo $service['name'] ?></h6>
-                  <small class="text-muted">Rp. <?php echo $service['price'] ?>  /kg</small>
+                  <small class="text-muted">Rp. <?php echo $service['price'] ?> /kg</small>
                 </div>
               </div>
               <?php endforeach ?>
@@ -178,10 +177,9 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="modal_id" name="modal_id">
+                <input type="hidden" id="modal_id"    name="modal_id">
                 <input type="hidden" id="modal_price" name="modal_price">
-                <input type="hidden" id="modal_type" name="modal_type">
-
+                <input type="hidden" id="modal_type"  name="modal_type">
 
                 <div class="mb-3">
                   <label for="" class="form-label">Service Name</label>
@@ -191,14 +189,13 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
                 <div class="mb-3">
                   <label for="" class="form-label">Weight / Qty</label>
                   <input type="number" id="modal_qty"
-                  class="form-control" placeholder="Weight / Qty" 
-                  step="0.1" min="0"> 
+                  class="form-control" placeholder="Weight / Qty">
                 </div>
 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addToCart()">Add To Cart</button>
+                <button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -227,24 +224,14 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
               <input type="hidden" id="subtotal_value">
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <span>Pajak (<?php echo $rowtax['percent'] ?>%) :</span>
+              <span>Pajak (10%)</span>
               <span id="tax">Rp. 0.0</span>
               <input type="hidden" id="tax_value">
-              <input type="hidden" id="tax_id" value="<?php echo $rowtax['percent'] ?>"> <!-- MARK -->
-
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <span>Total :</span>
+              <span>Total</span>
               <span id="total">Rp. 0.0</span>
               <input type="hidden" id="total_value">
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-              <span>Pay :</span>
-              <input type="number" id="pay" class="form-control w-50" placeholder="Enter the amount" oninput="calculateChange()" style="background-color: #BBDEFB;">
-            </div>
-            <div class="d-flex justify-content-between mb-2">
-              <span>Change :</span>
-              <input type="number" id="change" class="form-control w-50" style="background-color: #BBDEFB;" readonly >
             </div>
           </div>
           <div class="row g-2">
@@ -268,6 +255,10 @@ $order_code = "ORD-" . date('dmY') . str_pad($nextId, 4, "0", STR_PAD_LEFT);
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 
+
+  <script>
+    
+  </script>
 
   <script src="../assets/js/aldo.js"></script>
 
