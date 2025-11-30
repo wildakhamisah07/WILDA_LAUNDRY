@@ -52,11 +52,11 @@
                   <td><?php echo $key + 1 ?></td>
                   <td><?php echo $value ['order_code'] ?></td>
                   <td><?php echo $value['order_end_date'] ?></td>
-                  <td><?php echo $value['order_total'] ?></td>
-                  <td><?php echo $value['order_tax'] ?></td>
-                  <td><?php echo $value['order_pay'] ?></td>
-                  <td><?php echo $value['order_change'] ?></td>
-                  <td><?php echo $value['order_status'] ?></td>
+                  <td>Rp <?php echo number_format($value['order_total']) ?></td>
+                  <td>Rp <?php echo number_format($value['order_tax']) ?></td>
+                  <td>Rp <?php echo number_format($value['order_pay']) ?></td>
+                  <td>Rp <?php echo number_format($value['order_change']) ?></td>
+                  <td class="text-center"><?php echo $value['order_status'] == 0 ? '<span class="badge text-bg-warning fs-6">onProcess</span>' : '<span class="badge text-bg-success fs-6">Done</span>' ?></td>
                   <td>
                     <a href="pos/print.php?id=<?php echo $value['id'] ?>" class="btn btn-success btn-sm"> 
                       <i class="bi bi-printer"></i>

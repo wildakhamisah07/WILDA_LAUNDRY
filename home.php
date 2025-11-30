@@ -28,35 +28,50 @@ checkLogin();
 //   }
 // }
 
-$currentPage = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+// MIDDLEWARE
 
-$level_id = $_SESSION['LEVEL_ID'] ?? '';
+
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+$level_id    = $_SESSION['LEVEL_ID'] ?? '';
 
 $allowed_role = false;
 
-// Kalau ADMIN (level_id = 1), langsung lolos semua halaman
-if ($level_id == 1) {
-  $allowed_role = true;
+/**
+ * Halaman ekstra yang boleh diakses
+ * meskipun TIDAK ada di tabel menus
+ *
+ * key   = level_id
+ * value = array daftar page
+ */
+$extraAccess = [
+  3 => ['tambah-report'], // 3 = Pimpinan
+  // kalau mau admin juga punya akses khusus lain:
+  // 1 => ['add-role-menu', 'tambah-report'],
+];
+
+if (isset($extraAccess[$level_id]) && in_array($currentPage, $extraAccess[$level_id])) {
+    // kalau dia ada di daftar "akses ekstra", langsung lolos
+    $allowed_role = true;
 } else {
-  // baru lakukan pengecekan ke database untuk selain admin
-  $query = mysqli_query($config, "SELECT * FROM menus 
-    JOIN level_menus ON level_menus.menu_id = menus.id 
-    WHERE level_id = '$level_id' ");
-      $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+    // selain itu, cek seperti biasa ke tabel menus + level_menus
+    $query = mysqli_query($config, "SELECT * FROM menus 
+    JOIN level_menus ON level_menus.menu_id = menus.id WHERE level_id = '$level_id' ");
+    $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-      foreach ($rows as $row) {
-      if ($row['link'] == $currentPage) {
-      $allowed_role = true;
-      break;
+    foreach ($rows as $row) {
+        if ($row['link'] == $currentPage) {
+            $allowed_role = true;
+            break;
+        }
     }
-  }
 }
-
 
 
 if (!$allowed_role) {
   echo "<h1 class='center'>Access Failed!!</h1>";
-  echo "anda tidak memiliki hak akses ke halaman ini" . ucfirst($currentPage);
+  echo "You dont have permission to access this page" . ucfirst($currentPage);
+  echo "<br>";
+  echo "<br>";
   echo "<a href='home.php?page=dashboard'>Back to Dashboard</a>";
   exit;
 }
@@ -68,7 +83,7 @@ if (!$allowed_role) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Laundry | PPKD JP</title>
+  <title class="d-print-none">Laundry | PPKD JP</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -91,7 +106,13 @@ if (!$allowed_role) {
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+      <style>
+          @media print {
+      .d-print-none {
+        display: none !important;
+      }
+    }
+    </style>
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/

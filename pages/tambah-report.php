@@ -57,7 +57,7 @@ if (isset($_POST['update'])) {
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title" ><?php echo isset($_GET['edit']) ? 'Update' : 'Tambah '?> Menu</h3>
+          <h3 class="card-title" ><?php echo isset($_GET['edit']) ? 'Update' : 'Tambah '?> Report</h3>
           <div class="card-body">
             <form action="" method="post">
               <!-- <label for="" class="form-label">Name</label><br>
@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
               <label for="" class="form-label">Order Total</label><br>
               <input placeholder="Isi nama Order" type="text" class="form-control w-50 mb-2" name="order_total" value="<?php echo $report['order_total'] ?? '' ?>" readonly>
               <button class="btn btn-primary" type="submit" name="<?php echo isset($_GET['edit']) ? 'update' : 'simpan' ?>"><?php echo isset($_GET['edit']) ? 'Edit' : 'Create' ?></button>
-              <a href="?page=menu" class="btn btn-secondary">Back</a>
+              <a href="?page=report" class="btn btn-secondary">Back</a>
             </form>
           </div>
         </div>
