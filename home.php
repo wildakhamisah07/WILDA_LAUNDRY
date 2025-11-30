@@ -44,7 +44,10 @@ $allowed_role = false;
  * value = array daftar page
  */
 $extraAccess = [
+  
   3 => ['tambah-report'], // 3 = Pimpinan
+  1 => ['add-role-menu', 'tambah-report', 'tambah-service', 'tambah-level', 'tambah-customer','tambah-menu', 'tambah-user', 'tambah-report','tax'], // 1 = Admin
+
   // kalau mau admin juga punya akses khusus lain:
   // 1 => ['add-role-menu', 'tambah-report'],
 ];

@@ -36,7 +36,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data Order</h3>
+            <h3 class="card-title">Report Order</h3>
             <button class="btn btn-primary d-print-none"  onclick="window.print()" ><i class="bi bi-printer"></i> Print report</button>
           </div>
           <div class="card-body">
