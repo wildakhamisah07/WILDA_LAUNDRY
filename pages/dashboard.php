@@ -24,7 +24,7 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                     <div class="col-sm-7">
                         <div class="card-body">
                             <h5 class="card-title text-primary">Heloo <?= $user ?>! 🎉</h5>
-                            <p class="mb-4">Optimalkan layananmu—waktunya hasilkan lebih banyak order hari ini!</p>
+                            <p class="mb-4">Selamat Datang di Webisite!</p>
                         </div>
                     </div>
                     <div class="col-sm-5 text-center text-sm-left">
@@ -45,7 +45,6 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="assets/img/dashboard/laundry.png" alt="chart" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" data-bs-toggle="dropdown">
@@ -56,8 +55,8 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                             </div>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Services</span>
-                    <h3 class="card-title mb-2"><?= $totalServices ?></h3>
+                    <span class="fw-semibold d-block mb-1 text-center">Services</span>
+                    <h3 class="card-title mb-2 text-center"><?= $totalServices ?></h3>
                 </div>
             </div>
         </div>
@@ -68,7 +67,6 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="assets/img/dashboard/customer-service.png" alt="customer" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" data-bs-toggle="dropdown">
@@ -80,8 +78,8 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                             </div>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Customers</span>
-                    <h3 class="card-title text-nowrap mb-2"><?= $totalCustomer ?></h3>
+                    <span class="fw-semibold d-block mb-1 text-center">Customers</span>
+                    <h3 class="card-title text-nowrap mb-2 text-center"><?= $totalCustomer ?></h3>
                 </div>
             </div>
         </div>
@@ -92,7 +90,6 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="assets/img/dashboard/profits.png" alt="income" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" data-bs-toggle="dropdown">
@@ -100,8 +97,8 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                             </button>
                         </div>
                     </div>
-                    <span class="d-block fw-semibold mb-1">Income</span>
-                    <h3 class="card-title text-nowrap mb-2">Rp <?= number_format($totalIncome, 0, ',', '.') ?></h3>
+                    <span class="d-block fw-semibold mb-1 text-center">Income</span>
+                    <h3 class="card-title text-nowrap mb-2 text-center">Rp <?= number_format($totalIncome, 0, ',', '.') ?></h3>
                 </div>
             </div>
         </div>
@@ -112,7 +109,6 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="assets/img/dashboard/transaction.png" alt="transactions" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" data-bs-toggle="dropdown">
@@ -120,8 +116,8 @@ $totalIncome = mysqli_fetch_assoc($queryIncome)['income'];
                             </button>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Total Transaction</span>
-                    <h3 class="card-title mb-2"><?= $totalTransaction ?></h3>
+                    <span class="fw-semibold d-block mb-1 text-center">Total Transaction</span>
+                    <h3 class="card-title mb-2 text-center"><?= $totalTransaction ?></h3>
                 </div>
             </div>
         </div>
