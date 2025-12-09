@@ -1,21 +1,14 @@
 <?php
-// include;
-// include_once;
-// require_once;
-// require;
-// require_once 'config/koneksi.php';
+
 
 $query = mysqli_query($config, "SELECT * FROM customers u ORDER BY u.id DESC");
 $customers = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-// disini parameter delete
-// $_GET 
-// isset, empty
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $delete = mysqli_query($config, "DELETE FROM customers WHERE id = $id");
-    // redirect
-    header("location:?page=customer&hapus=berhasil");
+  $id = $_GET['delete'];
+  $delete = mysqli_query($config, "DELETE FROM customers WHERE id = $id");
+  // redirect
+  header("location:?page=customer&hapus=berhasil");
 }
 ?>
 

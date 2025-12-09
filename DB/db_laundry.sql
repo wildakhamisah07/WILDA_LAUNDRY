@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Nov 2025 pada 14.35
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Dec 01, 2025 at 05:10 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_laundry_aldo`
+-- Database: `db_laundry`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
@@ -37,17 +37,18 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Akmal', '0821999', 'Karet Tengsin', '2025-11-24 06:39:21', NULL),
-(2, 'bebas', '69669', 'Karet CItayama', '2025-11-24 07:49:13', '2025-11-24 07:49:18');
+(1, 'Arza', '078674567547', 'Benhil', '2025-11-24 06:39:21', '2025-12-01 00:13:40'),
+(2, 'WILDA KHAMISAH', '0823131314', 'Cipulir', '2025-11-24 07:49:13', '2025-12-01 00:13:26'),
+(3, 'Budi', '0831231212', 'Ciledug', '2025-12-01 03:29:59', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `levels`
+-- Table structure for table `levels`
 --
 
 CREATE TABLE `levels` (
@@ -58,7 +59,7 @@ CREATE TABLE `levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `levels`
+-- Dumping data for table `levels`
 --
 
 INSERT INTO `levels` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -69,7 +70,7 @@ INSERT INTO `levels` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `level_menus`
+-- Table structure for table `level_menus`
 --
 
 CREATE TABLE `level_menus` (
@@ -81,7 +82,7 @@ CREATE TABLE `level_menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `level_menus`
+-- Dumping data for table `level_menus`
 --
 
 INSERT INTO `level_menus` (`id`, `level_id`, `menu_id`, `created_at`, `updated_at`) VALUES
@@ -89,19 +90,19 @@ INSERT INTO `level_menus` (`id`, `level_id`, `menu_id`, `created_at`, `updated_a
 (43, 2, 6, '2025-11-30 07:05:44', NULL),
 (44, 3, 7, '2025-11-30 07:05:50', NULL),
 (45, 3, 6, '2025-11-30 07:05:50', NULL),
-(72, 1, 8, '2025-11-30 07:33:21', NULL),
-(73, 1, 7, '2025-11-30 07:33:21', NULL),
-(74, 1, 6, '2025-11-30 07:33:21', NULL),
-(75, 1, 5, '2025-11-30 07:33:21', NULL),
-(76, 1, 4, '2025-11-30 07:33:21', NULL),
-(77, 1, 3, '2025-11-30 07:33:21', NULL),
-(78, 1, 2, '2025-11-30 07:33:21', NULL),
-(79, 1, 1, '2025-11-30 07:33:21', NULL);
+(123, 1, 8, '2025-12-01 04:02:02', NULL),
+(124, 1, 7, '2025-12-01 04:02:02', NULL),
+(125, 1, 6, '2025-12-01 04:02:02', NULL),
+(126, 1, 5, '2025-12-01 04:02:02', NULL),
+(127, 1, 4, '2025-12-01 04:02:02', NULL),
+(128, 1, 3, '2025-12-01 04:02:02', NULL),
+(129, 1, 2, '2025-12-01 04:02:02', NULL),
+(130, 1, 1, '2025-12-01 04:02:02', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menus`
+-- Table structure for table `menus`
 --
 
 CREATE TABLE `menus` (
@@ -115,7 +116,7 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `menus`
+-- Dumping data for table `menus`
 --
 
 INSERT INTO `menus` (`id`, `name`, `icon`, `link`, `orders`, `created_at`, `updated_at`) VALUES
@@ -127,12 +128,13 @@ INSERT INTO `menus` (`id`, `name`, `icon`, `link`, `orders`, `created_at`, `upda
 (6, 'Dashboard', 'bi bi-database-fill', 'dashboard', 1, '2025-11-25 07:37:17', '2025-11-25 07:47:36'),
 (7, 'Report', 'bi bi-envelope-fill', 'report', 8, '2025-11-29 07:45:45', '2025-11-29 08:11:22'),
 (8, 'Order', 'bi bi-table', 'order', 7, '2025-11-29 08:09:52', '2025-11-29 08:10:58'),
-(9, 'Add Role', 'bi bi-code', 'add-role-menu', 9, '2025-11-30 07:15:32', '2025-11-30 07:15:41');
+(9, 'Add Role', 'bi bi-code', 'add-role-menu', 9, '2025-11-30 07:15:32', '2025-11-30 07:15:41'),
+(10, 'Tax', 'bi bi-percent', 'tax', 9, '2025-12-01 00:07:36', '2025-12-01 00:07:47');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `services`
+-- Table structure for table `services`
 --
 
 CREATE TABLE `services` (
@@ -145,7 +147,7 @@ CREATE TABLE `services` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `services`
+-- Dumping data for table `services`
 --
 
 INSERT INTO `services` (`id`, `name`, `price`, `description`, `created_at`, `updated_at`) VALUES
@@ -157,7 +159,7 @@ INSERT INTO `services` (`id`, `name`, `price`, `description`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `taxs`
+-- Table structure for table `taxs`
 --
 
 CREATE TABLE `taxs` (
@@ -169,7 +171,7 @@ CREATE TABLE `taxs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `taxs`
+-- Dumping data for table `taxs`
 --
 
 INSERT INTO `taxs` (`id`, `percent`, `is_active`, `created_at`, `updated_at`) VALUES
@@ -178,7 +180,7 @@ INSERT INTO `taxs` (`id`, `percent`, `is_active`, `created_at`, `updated_at`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `trans_orders`
+-- Table structure for table `trans_orders`
 --
 
 CREATE TABLE `trans_orders` (
@@ -196,21 +198,17 @@ CREATE TABLE `trans_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `trans_orders`
+-- Dumping data for table `trans_orders`
 --
 
 INSERT INTO `trans_orders` (`id`, `customer_id`, `order_code`, `order_end_date`, `order_status`, `order_pay`, `order_change`, `order_tax`, `order_total`, `created_at`, `updated_at`) VALUES
-(2, 1, 'ORD-291120250001', '2025-11-04', 1, 27000, 600, 2400, 26400, '2025-11-29 07:43:31', NULL),
-(3, 1, 'ORD-291120250003', '2025-11-29', 1, 11000, 550, 950, 10450, '2025-11-29 09:16:54', '2025-11-30 12:45:33'),
-(4, 1, 'ORD-291120250004', '2025-11-29', 1, 14000, 800, 1200, 13200, '2025-11-29 10:55:39', '2025-11-29 11:30:54'),
-(5, 2, 'ORD-291120250005', '2025-11-29', 1, 6000, 500, 500, 5500, '2025-11-29 12:24:34', '2025-11-30 12:45:53'),
-(6, 0, 'ORD-301120250006', '0000-00-00', 0, 12000, 1550, 950, 10450, '2025-11-30 07:42:24', NULL),
-(7, 0, 'ORD-301120250007', '0000-00-00', 0, 10000, 4500, 500, 5500, '2025-11-30 12:35:12', NULL);
+(1, 2, 'ORD-011220250001', '2025-12-01', 0, 35000, 350, 3150, 34650, '2025-12-01 04:07:57', NULL),
+(2, 1, 'ORD-011220250002', '2025-12-01', 0, 14000, 800, 1200, 13200, '2025-12-01 04:08:30', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `trans_order_details`
+-- Table structure for table `trans_order_details`
 --
 
 CREATE TABLE `trans_order_details` (
@@ -225,25 +223,21 @@ CREATE TABLE `trans_order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `trans_order_details`
+-- Dumping data for table `trans_order_details`
 --
 
 INSERT INTO `trans_order_details` (`id`, `order_id`, `service_id`, `qty`, `price`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 1, 24000, 24000, '2025-11-29 07:21:21', NULL),
-(2, 2, 4, 1, 24000, 24000, '2025-11-29 07:43:31', NULL),
-(3, 3, 5, 1, 4500, 4500, '2025-11-29 09:16:54', NULL),
-(4, 3, 6, 1, 5000, 5000, '2025-11-29 09:16:54', NULL),
-(5, 4, 7, 1, 7000, 7000, '2025-11-29 10:55:39', NULL),
-(6, 4, 6, 1, 5000, 5000, '2025-11-29 10:55:39', NULL),
-(7, 5, 6, 1, 5000, 5000, '2025-11-29 12:24:34', NULL),
-(8, 6, 6, 1, 5000, 5000, '2025-11-30 07:42:24', NULL),
-(9, 6, 5, 1, 4500, 4500, '2025-11-30 07:42:24', NULL),
-(10, 7, 6, 1, 5000, 5000, '2025-11-30 12:35:13', NULL);
+(1, 1, 4, 1, 5000, 5000, '2025-12-01 04:07:57', NULL),
+(2, 1, 5, 1, 4500, 4500, '2025-12-01 04:07:57', NULL),
+(3, 1, 6, 3, 5000, 15000, '2025-12-01 04:07:57', NULL),
+(4, 1, 7, 1, 7000, 7000, '2025-12-01 04:07:57', NULL),
+(5, 2, 4, 1, 5000, 5000, '2025-12-01 04:08:30', NULL),
+(6, 2, 7, 1, 7000, 7000, '2025-12-01 04:08:30', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -257,7 +251,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `level_id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
@@ -270,113 +264,113 @@ INSERT INTO `users` (`id`, `level_id`, `name`, `email`, `password`, `created_at`
 --
 
 --
--- Indeks untuk tabel `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `levels`
+-- Indexes for table `levels`
 --
 ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `level_menus`
+-- Indexes for table `level_menus`
 --
 ALTER TABLE `level_menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `menus`
+-- Indexes for table `menus`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `services`
+-- Indexes for table `services`
 --
 ALTER TABLE `services`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `taxs`
+-- Indexes for table `taxs`
 --
 ALTER TABLE `taxs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `trans_orders`
+-- Indexes for table `trans_orders`
 --
 ALTER TABLE `trans_orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `trans_order_details`
+-- Indexes for table `trans_order_details`
 --
 ALTER TABLE `trans_order_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `levels`
+-- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `level_menus`
+-- AUTO_INCREMENT for table `level_menus`
 --
 ALTER TABLE `level_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
--- AUTO_INCREMENT untuk tabel `menus`
+-- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `services`
+-- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `taxs`
+-- AUTO_INCREMENT for table `taxs`
 --
 ALTER TABLE `taxs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `trans_orders`
+-- AUTO_INCREMENT for table `trans_orders`
 --
 ALTER TABLE `trans_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `trans_order_details`
+-- AUTO_INCREMENT for table `trans_order_details`
 --
 ALTER TABLE `trans_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

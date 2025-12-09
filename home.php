@@ -6,67 +6,35 @@ include 'config/config.php';
 
 checkLogin();
 
-// login sbg operator, cuma bisa buka menu transaksi
-// operator mencoba ganti dari URL
-
-
-// $currentPage = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-
-
-// $level_id = $_SESSION['LEVEL_ID'] ?? '' ;
-
-// $query = mysqli_query($config, "SELECT * FROM menus 
-// JOIN level_menus ON level_menus.menu_id = menus.id WHERE level_id = '$level_id' ");
-// $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-// $allowed_role = false;
-
-// foreach($rows as $row) {
-//   if($row['link'] == $currentPage) {
-//     $allowed_role = true;
-//     break;
-//   }
-// }
-
-// MIDDLEWARE
-
-
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 $level_id    = $_SESSION['LEVEL_ID'] ?? '';
 
 $allowed_role = false;
-
-/**
- * Halaman ekstra yang boleh diakses
- * meskipun TIDAK ada di tabel menus
- *
- * key   = level_id
- * value = array daftar page
- */
+//ACCESS EXTRA LIST
 $extraAccess = [
-  
+
   3 => ['tambah-report'], // 3 = Pimpinan
-  1 => ['add-role-menu', 'tambah-report', 'tambah-service', 'tambah-level', 'tambah-customer','tambah-menu', 'tambah-user', 'tambah-report','tax'], // 1 = Admin
+  1 => ['add-role-menu', 'tambah-report', 'tambah-service', 'tambah-level', 'tambah-customer', 'tambah-menu', 'tambah-user', 'tambah-report', 'tambah-tax'], // 1 = UTK Admin
 
   // kalau mau admin juga punya akses khusus lain:
   // 1 => ['add-role-menu', 'tambah-report'],
 ];
 
 if (isset($extraAccess[$level_id]) && in_array($currentPage, $extraAccess[$level_id])) {
-    // kalau dia ada di daftar "akses ekstra", langsung lolos
-    $allowed_role = true;
+  // kalau dia ada di daftar "akses ekstra", langsung lolos
+  $allowed_role = true;
 } else {
-    // selain itu, cek seperti biasa ke tabel menus + level_menus
-    $query = mysqli_query($config, "SELECT * FROM menus 
+  // selain itu, cek seperti biasa ke tabel menus + level_menus
+  $query = mysqli_query($config, "SELECT * FROM menus 
     JOIN level_menus ON level_menus.menu_id = menus.id WHERE level_id = '$level_id' ");
-    $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+  $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    foreach ($rows as $row) {
-        if ($row['link'] == $currentPage) {
-            $allowed_role = true;
-            break;
-        }
+  foreach ($rows as $row) {
+    if ($row['link'] == $currentPage) {
+      $allowed_role = true;
+      break;
     }
+  }
 }
 
 
@@ -109,13 +77,13 @@ if (!$allowed_role) {
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-      <style>
-          @media print {
+  <style>
+    @media print {
       .d-print-none {
         display: none !important;
       }
     }
-    </style>
+  </style>
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/

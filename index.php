@@ -10,9 +10,6 @@ if (isset($_POST['login'])) {
 
   $query    = mysqli_query($config, "SELECT * FROM users WHERE email='$email' ");
 
-  // num_rows : function untuk mengecek di dalam table data query ada apa engga 
-  // jika ada/berhasil akan menghasilkan nilai 1 sebaliknya akan 0
-
   if (mysqli_num_rows($query) > 0) {
 
     // mengambil data hasil query di dalam table
@@ -20,8 +17,7 @@ if (isset($_POST['login'])) {
     // jika pasword yang di input sama dengan yang ada ditable
     // --- : a == a, a = 1 a(var)===a(var)
     if ($sha1 === $user['password']) {
-      // echo $password;
-      // echo "aaaaaaaaaaaaaaaaaaaaa";
+     
       $_SESSION['ID'] = $user['id'];
       $_SESSION['NAME'] = $user['name'];
       $_SESSION['LEVEL_ID'] = $user['level_id'];

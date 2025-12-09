@@ -20,14 +20,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      @media print {
+        .d-print-none {
+          display: none !important;
+        }
+      }
+    </style>
+
   </head>
 
   <body>
     <div class="row">
       <div class="col-sm-12">
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Data Order</h3>
+          <div class="card-header text-center">
+            <img src="assets/img/logo.png" width="100" style="margin-bottom:10px;">
+            <h3 class="card-title mt-2">Report Orderan</h3>
+
+            <button class="btn btn-primary d-print-none" onclick="window.print()" style="position:absolute; right:20px; top:20px;">
+              <i class="bi bi-printer"></i> Print report
+            </button>
           </div>
           <div class="card-body">
             <div class="d-flex justify-content-end p-2">
@@ -50,7 +63,7 @@
               ?>
                 <tr>
                   <td><?php echo $key + 1 ?></td>
-                  <td><?php echo $value ['order_code'] ?></td>
+                  <td><?php echo $value['order_code'] ?></td>
                   <td><?php echo $value['order_end_date'] ?></td>
                   <td>Rp <?php echo number_format($value['order_total']) ?></td>
                   <td>Rp <?php echo number_format($value['order_tax']) ?></td>
@@ -58,7 +71,7 @@
                   <td>Rp <?php echo number_format($value['order_change']) ?></td>
                   <td class="text-center"><?php echo $value['order_status'] == 0 ? '<span class="badge text-bg-warning fs-6">onProcess</span>' : '<span class="badge text-bg-success fs-6">Done</span>' ?></td>
                   <td>
-                    <a href="pos/print.php?id=<?php echo $value['id'] ?>" class="btn btn-success btn-sm"> 
+                    <a href="pos/print.php?id=<?php echo $value['id'] ?>" class="btn btn-success btn-sm">
                       <i class="bi bi-printer"></i>
                       Print</a>
                     <a href="?page=order&delete=<?php echo $value['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus')">

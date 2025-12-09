@@ -20,7 +20,7 @@ $taxs     = mysqli_fetch_assoc($queryTax);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struk Transaksi Laundry</title>
+  <title>Struk Transaksi Wilda Laundry </title>
 
   <!-- internal css: kode css ada di file html -->
   <!-- external css: kode css ada di file .css baru dipanggil file html -->
@@ -130,16 +130,24 @@ $taxs     = mysqli_fetch_assoc($queryTax);
         size: 80mm auto;
       }
     }
+
+    @media print {
+      img {
+        display: block !important;
+      }
+    }
   </style>
 </head>
 
 <body onload="window.print()">
   <div class="struck-page">
     <div class="header">
-      <h2>Struk Pembayaran</h2>
-      <p>Jl Benhil Karet Jakarta Pusat</p>
+      <img src="../assets/img/logo.png" width="80" style="margin-bottom:8px;">
+      <h2>Struk Pembayaran Wilda Laundry</h2>
+      <p>Jl. Bendungan Hilir Raya Kel.Bendungan Hilir Kec.Tanah Abang. Kode-pos 10210;</p>
       <p>0899423122910</p>
     </div>
+
     <div class="info">
       <div class="info-row">
         <?php
@@ -161,25 +169,25 @@ $taxs     = mysqli_fetch_assoc($queryTax);
     </div>
     <div class="separator"></div>
     <div class="items">
-      <?php foreach($rowDetails as $item):?>
-      <div class="item">
-        <span class="item-name"><?php echo $item['name']?></span>
-        <span class="item-qty"><?php echo $item['qty'] ?></span>
-        <span class="item-price">Rp. <?php echo number_format($item['price']) ?>  </span>
-      </div>
+      <?php foreach ($rowDetails as $item): ?>
+        <div class="item">
+          <span class="item-name"><?php echo $item['name'] ?></span>
+          <span class="item-qty"><?php echo $item['qty'] ?></span>
+          <span class="item-price">Rp. <?php echo number_format($item['price']) ?> </span>
+        </div>
       <?php endforeach ?>
     </div>
     <div class="separator"></div>
     <div class="totals">
-      <?php foreach($rowDetails as $detail): ?>
-            <div class="total-row">
-                <span>Sub Total</span>
-                <span><?php echo "Rp. " . number_format($detail['subtotal'], 0, ',', '.') ?></span>
-            </div>
-            <?php endforeach ?>
+      <?php foreach ($rowDetails as $detail): ?>
+        <div class="total-row">
+          <span>Sub Total</span>
+          <span><?php echo "Rp. " . number_format($detail['subtotal'], 0, ',', '.') ?></span>
+        </div>
+      <?php endforeach ?>
       <div class="total-row">
         <span>Ppn (<?php $taxs['percent'] ?>)</span>
-        <span><?php echo "Rp. " . number_format($row['order_tax'], 0, ',', ',')?></span>
+        <span><?php echo "Rp. " . number_format($row['order_tax'], 0, ',', ',') ?></span>
       </div>
       <div class="separator"></div>
       <div class="total-row grand">
@@ -190,11 +198,11 @@ $taxs     = mysqli_fetch_assoc($queryTax);
     <div class="payment">
       <div class="total-row">
         <span>Cash</span>
-        <span><?php echo "Rp. " . number_format($row['order_pay'], 0, ',',',') ?> </span>
+        <span><?php echo "Rp. " . number_format($row['order_pay'], 0, ',', ',') ?> </span>
       </div>
       <div class="total-row">
         <span>Change</span>
-        <span><?php echo "Rp. " . number_format($row['order_change'], 0, ',',',') ?> </span>
+        <span><?php echo "Rp. " . number_format($row['order_change'], 0, ',', ',') ?> </span>
       </div>
     </div>
   </div>

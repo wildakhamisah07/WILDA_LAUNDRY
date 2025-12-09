@@ -2,7 +2,7 @@
 // require_once "config/koneksi.php";
 $selectCategory = mysqli_query($koneksi, "SELECT * FROM categories");
 $categories = mysqli_fetch_all($selectCategory, MYSQLI_ASSOC);
-// var_dump($categories);
+
 //PRODUCTS : 
 $id   = isset($_GET['edit']) ? $_GET['edit'] : '';
 $s_product  = mysqli_query($koneksi, "SELECT * FROM products WHERE id = '$id' ");
